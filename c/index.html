@@ -121,6 +121,20 @@
   }
   .support-btn:hover { background: rgba(255,209,102,.16); }
   .support-btn small { display: block; font-size: 11.5px; font-weight: 500; margin-top: 2px; }
+  .hero-cta { margin-top: 26px; align-self: flex-start; }
+  .tipping h2 { font-size: 17px; font-weight: 900; margin-bottom: 4px; }
+  .tipping .sub { font-size: 12.5px; color: var(--dim); margin-bottom: 18px; }
+  .tip-menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 18px; }
+  .tip-menu a {
+    text-decoration: none; text-align: center; padding: 13px 8px;
+    border: 1px solid var(--line); border-radius: 10px; background: rgba(155,92,255,.06); color: var(--ink);
+    font-weight: 700; transition: all .2s;
+  }
+  .tip-menu a:hover { border-color: var(--pink); box-shadow: 0 0 14px rgba(255,77,141,.3); }
+  .tip-menu a b { display: block; font-size: 19px; color: var(--gold); text-shadow: 0 0 10px rgba(255,209,102,.4); }
+  .tip-menu a span { font-size: 11.5px; color: var(--dim); }
+  .tip-menu a.big { grid-column: span 2; border-color: rgba(255,209,102,.5); background: rgba(255,209,102,.07); }
+  .tip-note { font-size: 11px; color: var(--dim); margin-top: 10px; }
 
   .thanks { display: none; min-height: 86vh; flex-direction: column; justify-content: center; text-align: center; }
   .thanks .big { font-size: 18px; font-weight: 900; margin: 18px 0 6px; }
@@ -167,6 +181,7 @@
       2026.7.19(日) 12:00<br>
       アスティとくしま テレコメディア ホール
     </p>
+    <a class="support-btn hero-cta" data-tip="hero" href="#">拍手のかわりに、投げ銭を!<small>入場無料・100円から</small></a>
     <div class="scroll-hint" id="scrollHint" onclick="document.querySelector('.speech').scrollIntoView({behavior:'smooth'})">
       <span>&#9660; SCROLL</span>
     </div>
@@ -175,9 +190,26 @@
   <section>
     <div class="panel speech fade-in">
       <span class="tag">EPILOGUE</span>
-      <p>ヴェローナの物語は、幕を下ろしました。</p>
-      <p class="em">この物語にエピローグを<br>書き足せるのは、あなただけ。</p>
-      <p>感想をひとこと、聞かせてください。<br>それが私たちの、明日の芝居になります。</p>
+      <p>ロミオは50分で恋に落ち、決闘し、毒をあおりました。<br>ジュリエットも、たいへんな50分でした。</p>
+      <p class="em">この公演は入場無料。<br>劇団の明日は、<br>皆さまの投げ銭にかかっています。</p>
+      <p>「面白かった!」の気持ちを、そのまま投げてください。<br>感想も、もちろん嬉しいです。</p>
+    </div>
+  </section>
+
+  <section class="support" id="support">
+    <div class="panel tipping">
+      <span class="tag">CURTAIN CALL</span>
+      <h2>拍手のかわりに、投げ銭を。</h2>
+      <p class="sub">今夜の気分は、どの拍手でしたか?</p>
+      <div class="tip-menu">
+        <a data-tip="clap" href="#"><b>¥100</b><span>拍手</span></a>
+        <a data-tip="bravo" href="#"><b>¥500</b><span>ブラボー!</span></a>
+        <a data-tip="bouquet" href="#"><b>¥1,000</b><span>花束</span></a>
+        <a data-tip="ovation" href="#"><b>¥3,000</b><span>スタンディングオベーション</span></a>
+        <a data-tip="patron" class="big" href="#"><b>¥10,000</b><span>パトロン — 劇団の恩人</span></a>
+      </div>
+      <a class="support-btn" id="supportBtn" data-tip="main" href="#">投げ銭で応援する!<small>Stripeで安全に・金額自由</small></a>
+      <p class="tip-note">金額はどのボタンからでもStripeのページで自由に変更できます。</p>
     </div>
   </section>
 
@@ -226,15 +258,11 @@
     </div>
   </section>
 
-  <section class="support" id="support">
-    <p class="lead">本公演は入場無料・投げ銭制です。<br>「面白かった!」を、拍手のかわりに。</p>
-    <a class="support-btn" id="supportBtn" href="#" target="_blank" rel="noopener">投げ銭で応援する!<small>100円から</small></a>
-  </section>
-
   <section class="thanks" id="thanks">
     <p class="hearts">&#9829;&#9829;</p>
     <p class="big">感想、たしかに受け取りました!</p>
     <p class="note">『カジュアルなロミオとジュリエット』<br>HRWC 2026 — アスティとくしま</p>
+    <p class="follow-note" style="margin-top:18px">最後にもうひとつ。<br><strong>拍手のかわりの投げ銭を、忘れずに。</strong></p>
     <div class="follow">
       <p class="follow-note"><strong>#カクシンハン #カジュアルロミジュリツアー</strong> をつけて<br>SNSでも感想をお待ちしています!</p>
       <a class="btn-share" id="shareBtn" href="#" target="_blank" rel="noopener">X で感想をポスト<small>#カジュアルロミジュリツアー</small></a>

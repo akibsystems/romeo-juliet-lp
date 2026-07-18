@@ -17,8 +17,7 @@ const ENTRY = {
 const STRIPE_LINK = 'https://donate.stripe.com/aFadRb1l61vZ5bn17z0x208';
 
 // ===== 計測(あとから設定: IDを入れると有効化) =====
-const GA_ID = '';      // 例: 'G-XXXXXXXXXX'
-const CLARITY_ID = ''; // 例: 'abcdefghij'
+const GA_ID = ''; // 例: 'G-XXXXXXXXXX'
 
 // --- GA4 ---
 if (GA_ID) {
@@ -29,28 +28,26 @@ if (GA_ID) {
   window.gtag = function(){ dataLayer.push(arguments); };
   gtag('js', new Date()); gtag('config', GA_ID);
 }
-// --- Microsoft Clarity ---
-if (CLARITY_ID) {
-  (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  })(window, document, "clarity", "script", CLARITY_ID);
-}
-// GA4 + Clarity 両方にイベントを送る
+// GA4 にイベントを送る
 function track(eventName, params) {
   try { if (window.gtag) gtag('event', eventName, params || {}); } catch (e) {}
-  try { if (window.clarity) clarity('event', eventName); } catch (e) {}
 }
 
 // ===== 投げ銭ボタン(クリック計測つき) =====
+// data-tip 属性を持つすべてのリンクを Stripe に接続し、ラベル別に計測
 (function setupSupport() {
-  const support = document.getElementById('support');
-  if (!support) return;
-  if (!STRIPE_LINK) { support.style.display = 'none'; return; }
-  const btn = document.getElementById('supportBtn');
-  btn.href = STRIPE_LINK;
-  btn.addEventListener('click', () => track('support_click'));
+  const tips = document.querySelectorAll('[data-tip]');
+  if (!STRIPE_LINK) {
+    const support = document.getElementById('support');
+    if (support) support.style.display = 'none';
+    tips.forEach(a => a.style.display = 'none');
+    return;
+  }
+  tips.forEach(a => {
+    a.href = STRIPE_LINK;
+    a.target = '_blank'; a.rel = 'noopener';
+    a.addEventListener('click', () => track('support_click', { label: a.dataset.tip }));
+  });
 })();
 
 // ===== Google フォーム送信 =====

@@ -2,10 +2,312 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=../">
-<title>B案: ポップ・二家カラー(ルートに採用)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カジュアルなロミオとジュリエット — 感想&応援(B案)</title>
+<meta name="description" content="カクシンハン『カジュアルなロミオとジュリエット』をご覧いただきありがとうございました。感想と応援をお待ちしています。">
+<meta property="og:title" content="カジュアルなロミオとジュリエット — 感想&応援">
+<meta property="og:description" content="50分のジェットコースター、いかがでしたか?あなたの感想が、この物語のエピローグです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;800&family=Bungee&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fff8f0;
+    --ink: #33272a;
+    --dim: #8a7a7e;
+    --capulet: #ff5964;   /* キャピュレット家=赤 */
+    --montague: #3aa6ff;  /* モンタギュー家=青 */
+    --gold: #ffb830;
+    --panel: #ffffff;
+    --line: #f0e2d8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+  .latin { font-family: 'Bungee', cursive; }
+  /* 紙吹雪(ふたつの家の色) */
+  .confetti { position: fixed; top: -12px; z-index: 0; pointer-events: none; font-size: 13px; animation: fall linear infinite; opacity: .7; }
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(540deg); }
+  }
+  main { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* HERO */
+  .hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; }
+  .chip {
+    display: inline-block; align-self: flex-start;
+    font-size: 12px; font-weight: 800; letter-spacing: .3em;
+    color: #fff; background: var(--ink); border-radius: 999px;
+    padding: 4px 18px; margin-bottom: 20px;
+  }
+  .two-hearts { font-size: 30px; letter-spacing: .1em; margin-bottom: 10px; }
+  .two-hearts .c { color: var(--capulet); }
+  .two-hearts .m { color: var(--montague); }
+  .two-hearts span { display: inline-block; animation: bounce 2.4s ease-in-out infinite; }
+  .two-hearts .m { animation-delay: .3s; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .hero h1 {
+    font-size: 34px; font-weight: 800; line-height: 1.4; letter-spacing: .06em; margin-bottom: 6px;
+  }
+  .hero h1 .rj {
+    background: linear-gradient(90deg, var(--montague), var(--capulet));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .latin-sub { font-size: 13px; color: var(--gold); letter-spacing: .18em; margin-bottom: 18px; }
+  .hero .sub { font-size: 15px; color: var(--dim); font-weight: 500; margin-bottom: 22px; }
+  .stage-info {
+    font-size: 13px; color: var(--dim); border-left: 4px solid var(--gold);
+    padding-left: 14px; line-height: 1.8;
+  }
+  .scroll-hint {
+    margin-top: 44px; font-size: 12px; font-weight: 800; color: var(--dim); letter-spacing: .3em;
+    display: flex; flex-direction: column; gap: 4px; line-height: 1.3;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .scroll-hint .auto-arrow { animation: cascade 2.2s ease-in-out infinite; }
+  @keyframes cascade {
+    0%, 55%, 100% { opacity: .18; }
+    25% { opacity: 1; color: var(--capulet); }
+  }
+
+  .panel {
+    border: 2px solid var(--ink); border-radius: 16px; background: var(--panel);
+    padding: 28px 22px; margin: 26px 0; position: relative;
+    box-shadow: 6px 6px 0 rgba(51,39,42,.12);
+  }
+  .panel .tag {
+    position: absolute; top: -14px; left: 16px; padding: 2px 14px;
+    background: var(--gold); color: var(--ink); border: 2px solid var(--ink);
+    border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .22em;
+  }
+  .speech p { font-size: 15.5px; margin-bottom: 1.4em; }
+  .speech p:last-child { margin-bottom: 0; }
+  .speech .em { font-size: 18px; font-weight: 800; }
+  .speech .em .c { color: var(--capulet); }
+  .speech .em .m { color: var(--montague); }
+
+  /* SURVEY */
+  .survey h2 { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+  .survey .sub { font-size: 12.5px; color: var(--dim); margin-bottom: 24px; }
+  .field { margin-bottom: 22px; }
+  .field label { display: block; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; color: var(--ink); margin-bottom: 8px; }
+  .field label small { font-weight: 500; color: var(--dim); }
+  textarea, select, input[type="text"] {
+    width: 100%; font-family: inherit; font-size: 16px; color: var(--ink);
+    background: var(--bg); border: 2px solid var(--line); border-radius: 10px; padding: 13px;
+  }
+  textarea { min-height: 130px; resize: vertical; }
+  textarea:focus, select:focus, input[type="text"]:focus { outline: none; border-color: var(--montague); }
+  .submit-btn {
+    width: 100%; font-family: inherit; font-size: 17px; font-weight: 800; letter-spacing: .3em;
+    padding: 17px; margin-top: 8px; cursor: pointer; border: 2px solid var(--ink); border-radius: 999px;
+    background: linear-gradient(90deg, var(--montague), var(--capulet)); color: #fff;
+    box-shadow: 4px 4px 0 rgba(51,39,42,.2); transition: transform .15s, box-shadow .15s;
+  }
+  .submit-btn:hover { transform: translate(-1px,-1px); box-shadow: 6px 6px 0 rgba(51,39,42,.25); }
+  .submit-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 rgba(51,39,42,.2); }
+
+  /* SUPPORT(投げ銭) */
+  .support { margin-top: 40px; text-align: center; }
+  .support p.lead { font-size: 14.5px; color: var(--ink); font-weight: 500; margin-bottom: 14px; }
+  .support-btn {
+    display: inline-block; text-decoration: none; text-align: center;
+    font-size: 17px; font-weight: 800; letter-spacing: .1em;
+    padding: 16px 38px; border-radius: 999px;
+    border: 2px solid var(--ink); color: var(--ink);
+    background: var(--gold);
+    box-shadow: 4px 4px 0 rgba(51,39,42,.2);
+    transition: transform .15s, box-shadow .15s;
+    animation: wiggle 3.6s ease-in-out infinite;
+  }
+  @keyframes wiggle {
+    0%, 88%, 100% { transform: rotate(0); }
+    90% { transform: rotate(1.6deg); } 93% { transform: rotate(-1.6deg); } 96% { transform: rotate(1deg); }
+  }
+  .support-btn:hover { transform: translate(-1px,-1px); box-shadow: 6px 6px 0 rgba(51,39,42,.25); }
+  .support-btn small { display: block; font-size: 12px; font-weight: 500; margin-top: 2px; }
+  .hero-cta { margin-top: 28px; align-self: flex-start; }
+  .tipping h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+  .tipping .sub { font-size: 12.5px; color: var(--dim); margin-bottom: 18px; }
+  .tip-menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 18px; }
+  .tip-menu a {
+    text-decoration: none; text-align: center; padding: 14px 8px;
+    border: 2px solid var(--ink); border-radius: 12px; background: var(--bg); color: var(--ink);
+    font-weight: 800; box-shadow: 3px 3px 0 rgba(51,39,42,.12); transition: transform .15s, box-shadow .15s;
+  }
+  .tip-menu a:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 rgba(51,39,42,.2); }
+  .tip-menu a b { display: block; font-size: 21px; }
+  .tip-menu a span { font-size: 12px; color: var(--dim); font-weight: 700; }
+  .tip-menu a.big { grid-column: span 2; background: linear-gradient(90deg, rgba(58,166,255,.12), rgba(255,89,100,.12)); }
+  .tip-note { font-size: 11.5px; color: var(--dim); margin-top: 10px; }
+
+  /* THANKS */
+  .thanks { display: none; min-height: 86vh; flex-direction: column; justify-content: center; text-align: center; }
+  .thanks .big { font-size: 19px; font-weight: 800; margin: 18px 0 6px; }
+  .thanks .note { font-size: 14px; color: var(--dim); }
+  .thanks .hearts { font-size: 34px; }
+  .thanks .hearts .c { color: var(--capulet); } .thanks .hearts .m { color: var(--montague); }
+  .follow { margin-top: 38px; }
+  .follow-note { font-size: 14px; color: var(--ink); margin: 10px 0 16px; }
+  .btn-x, .btn-share {
+    display: inline-block; text-decoration: none; text-align: center;
+    font-size: 15px; font-weight: 800; letter-spacing: .08em;
+    padding: 14px 30px; border-radius: 999px; margin: 6px 4px;
+    border: 2px solid var(--ink); transition: transform .15s, box-shadow .15s;
+    box-shadow: 4px 4px 0 rgba(51,39,42,.15);
+  }
+  .btn-x { background: var(--ink); color: #fff; }
+  .btn-share { background: #fff; color: var(--ink); }
+  .btn-x:hover, .btn-share:hover { transform: translate(-1px,-1px); box-shadow: 6px 6px 0 rgba(51,39,42,.22); }
+  .btn-x small, .btn-share small { display: block; font-size: 11px; font-weight: 500; opacity: .8; margin-top: 2px; }
+
+  /* CONTACT */
+  .contact { margin-top: 40px; text-align: center; }
+  .contact p { font-size: 13.5px; color: var(--dim); margin-bottom: 14px; }
+  .contact-btn {
+    display: inline-block; text-decoration: none; font-size: 14px; font-weight: 800;
+    padding: 12px 30px; border-radius: 999px; border: 2px solid var(--line);
+    color: var(--dim); background: #fff; transition: all .2s;
+  }
+  .contact-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .contact-btn small { display: block; font-size: 11px; font-weight: 500; margin-top: 2px; }
+  .sub-rule { width: 60px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--montague), var(--capulet)); margin: 56px auto 0; }
+
+  footer { position: relative; z-index: 1; text-align: center; padding: 40px 20px 60px; font-size: 11.5px; letter-spacing: .08em; color: var(--dim); line-height: 2; }
+  footer a { color: var(--dim); }
+  .fade-in { animation: fadeIn .9s ease both; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+</style>
 </head>
-<body>
-<p>B案「ポップ・二家カラー」はルート <a href="../">/</a> に採用されています。</p>
+<body data-confetti="#ff5964,#3aa6ff,#ffb830">
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <span class="chip">CURTAIN CALL</span>
+    <p class="two-hearts"><span class="m">&#9829;</span><span class="c">&#9829;</span></p>
+    <h1>カジュアルな<br><span class="rj">ロミオとジュリエット</span></h1>
+    <p class="latin-sub latin">ROMEO &amp; JULIET — 50 MIN.</p>
+    <p class="sub">ご観劇ありがとうございました!<br>50分のジェットコースター、いかがでしたか?</p>
+    <p class="stage-info">
+      Theatre Company カクシンハン<br>
+      2026.7.19(日) 12:00<br>
+      アスティとくしま テレコメディア ホール
+    </p>
+    <a class="support-btn hero-cta" data-tip="hero" href="#">拍手のかわりに、投げ銭を!<small>入場無料の代わりに・100円から</small></a>
+    <div class="scroll-hint" id="scrollHint" onclick="document.querySelector('.speech').scrollIntoView({behavior:'smooth'})">
+      <span>&#9660; SCROLL</span>
+    </div>
+  </section>
+
+  <!-- MESSAGE -->
+  <section>
+    <div class="panel speech fade-in">
+      <span class="tag">EPILOGUE</span>
+      <p><span class="m">ロミオ</span>は50分で恋に落ち、決闘し、毒をあおりました。<br><span class="c">ジュリエット</span>も、たいへんな50分でした。</p>
+      <p class="em">この公演は入場無料。<br>劇団の明日は、<br>皆さまの投げ銭にかかっています。</p>
+      <p>「面白かった!」の気持ちを、そのまま投げてください。<br>感想も、もちろん嬉しいです。</p>
+    </div>
+  </section>
+
+  <!-- SUPPORT(投げ銭・メイン) -->
+  <section class="support" id="support">
+    <div class="panel tipping">
+      <span class="tag">CURTAIN CALL</span>
+      <h2>拍手のかわりに、投げ銭を。</h2>
+      <p class="sub">今日の気分は、どの拍手でしたか?</p>
+      <div class="tip-menu">
+        <a data-tip="clap" href="#"><b>¥100</b><span>拍手</span></a>
+        <a data-tip="bravo" href="#"><b>¥500</b><span>ブラボー!</span></a>
+        <a data-tip="bouquet" href="#"><b>¥1,000</b><span>花束</span></a>
+        <a data-tip="ovation" href="#"><b>¥3,000</b><span>スタンディングオベーション</span></a>
+        <a data-tip="patron" class="big" href="#"><b>¥10,000</b><span>パトロン — 劇団の恩人</span></a>
+      </div>
+      <a class="support-btn" id="supportBtn" data-tip="main" href="#">投げ銭で応援する!<small>Stripeで安全に・金額自由</small></a>
+      <p class="tip-note">金額はどのボタンからでもStripeのページで自由に変更できます。</p>
+    </div>
+  </section>
+
+  <!-- SURVEY -->
+  <section id="surveySection">
+    <div class="panel survey">
+      <span class="tag">FEEDBACK</span>
+      <h2>感想をお聞かせください</h2>
+      <p class="sub">あなたの言葉が、この物語のエピローグになります。</p>
+      <form id="surveyForm">
+        <div class="field">
+          <label for="impression">ご覧になった感想</label>
+          <textarea id="impression" name="impression" placeholder="自由にお書きください"></textarea>
+        </div>
+        <div class="field">
+          <label for="firsttime">シェイクスピア観劇は… <small>(任意)</small></label>
+          <select id="firsttime" name="firsttime">
+            <option value="">選択してください</option>
+            <option>今日がはじめて!</option>
+            <option>2〜3回目</option>
+            <option>もう常連です</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="nickname">ニックネーム <small>(任意)</small></label>
+          <input type="text" id="nickname" name="nickname" maxlength="30" placeholder="感想を紹介するときのお名前">
+        </div>
+        <div class="field">
+          <label for="consent">いただいた感想の紹介について <small>(任意)</small></label>
+          <select id="consent" name="consent">
+            <option value="">選択してください</option>
+            <option>SNSやWebでの紹介OK(ニックネーム付き)</option>
+            <option>紹介OK(匿名で)</option>
+            <option>紹介はしないで</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="age">年代 <small>(任意)</small></label>
+          <select id="age" name="age">
+            <option value="">選択してください</option>
+            <option>10代以下</option><option>20代</option><option>30代</option>
+            <option>40代</option><option>50代</option><option>60代以上</option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">送 信</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- THANKS -->
+  <section class="thanks" id="thanks">
+    <p class="hearts"><span class="m">&#9829;</span><span class="c">&#9829;</span></p>
+    <p class="big">感想、たしかに受け取りました!</p>
+    <p class="note">『カジュアルなロミオとジュリエット』<br>HRWC 2026 — アスティとくしま</p>
+    <p class="follow-note" style="margin-top:18px">最後にもうひとつ。<br><strong>拍手のかわりの投げ銭を、忘れずに。</strong></p>
+    <div class="follow">
+      <p class="follow-note"><strong>#カクシンハン #カジュアルロミジュリツアー</strong> をつけて<br>SNSでも感想をお待ちしています!</p>
+      <a class="btn-share" id="shareBtn" href="#" target="_blank" rel="noopener">X で感想をポスト<small>#カジュアルロミジュリツアー</small></a>
+      <a class="btn-x" href="https://x.com/KAKUSHINHAN" target="_blank" rel="noopener">カクシンハンをフォロー<small>@KAKUSHINHAN</small></a>
+    </div>
+    <div class="support" id="supportAfter"></div>
+  </section>
+
+  <div class="sub-rule"></div>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <p>シェイクスピア、演劇、エンタメに関する<br>お問い合わせ・ご相談</p>
+    <a class="contact-btn" href="mailto:info@tobe-tokyo.com?subject=%E3%80%8E%E3%82%AB%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E3%81%AA%E3%83%AD%E3%83%9F%E3%82%AA%E3%81%A8%E3%82%B8%E3%83%A5%E3%83%AA%E3%82%A8%E3%83%83%E3%83%88%E3%80%8F%E3%82%92%E8%A6%8B%E3%81%A6%EF%BC%88%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%EF%BC%89">メールで問い合わせる<small>info@tobe-tokyo.com</small></a>
+  </section>
+</main>
+
+<footer>
+  Theatre Company カクシンハン『カジュアルなロミオとジュリエット』<br>
+  台本・演出:木村龍之介 | 出演:柳本璃音 / 永田紗茅 / 日景眞<br>
+  主催:<a href="https://www.tobe-tokyo.com/ja" target="_blank" rel="noopener">株式会社トゥービー</a> | 助成:芸術文化振興基金<br>
+  HRWC 2026 | 2026.7.19 アスティとくしま | <a href="https://hrwc.jp/" target="_blank" rel="noopener">hrwc.jp</a> | <a href="https://peatix.com/event/5072716" target="_blank" rel="noopener">Peatix</a>
+</footer>
+
+<script src="../shared.js"></script>
 </body>
 </html>
