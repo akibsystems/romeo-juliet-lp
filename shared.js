@@ -4,13 +4,13 @@
 // ============================================================
 
 // ===== Google フォーム(作成後に formResponse URL と entry ID を設定) =====
-const SURVEY_FORM = ''; // 例: 'https://docs.google.com/forms/d/e/XXXX/formResponse'
+const SURVEY_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSdKPg8sW2pY818jQ6-2Buge4rKrSNkWU7faADRVwFcByig3Sw/formResponse';
 const ENTRY = {
-  impression: '', // 感想             例: 'entry.1234567890'
-  firsttime:  '', // シェイクスピア観劇回数
-  nickname:   '', // ニックネーム
-  consent:    '', // 紹介許諾
-  age:        ''  // 年代
+  impression: 'entry.1263349879', // 感想
+  firsttime:  'entry.1762247259', // シェイクスピア観劇回数
+  nickname:   'entry.288189140',  // ニックネーム
+  consent:    'entry.1485371368', // 紹介許諾
+  age:        'entry.1158783329'  // 年代
 };
 
 // ===== Stripe Payment Link(投げ銭) =====
