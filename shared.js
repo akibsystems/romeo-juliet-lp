@@ -10,8 +10,28 @@ const ENTRY = {
   firsttime:  'entry.1762247259', // シェイクスピア観劇回数
   nickname:   'entry.288189140',  // ニックネーム
   consent:    'entry.1485371368', // 紹介許諾
-  age:        'entry.1158783329'  // 年代
+  age:        'entry.1158783329', // 年代
+  clientId:   'entry.1118639962'  // 匿名共通ID(Stripe突合用)
 };
+
+// ===== 匿名共通ID =====
+// ブラウザごとに乱数IDを生成・保存。
+// Stripeの client_reference_id とフォームの隠し項目に同じ値を送り、
+// 決済とアンケートを同一ブラウザ単位で紐付ける(個人情報は含まない)。
+const CLIENT_ID = (() => {
+  const KEY = 'rj_client_id';
+  try {
+    let id = localStorage.getItem(KEY);
+    if (!id) {
+      id = 'rj-' + (crypto.randomUUID ? crypto.randomUUID() :
+        Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10));
+      localStorage.setItem(KEY, id);
+    }
+    return id;
+  } catch (e) {
+    return 'rj-nostore-' + Math.random().toString(36).slice(2, 10);
+  }
+})();
 
 // ===== Stripe Payment Link(投げ銭) =====
 const STRIPE_LINK = 'https://donate.stripe.com/aFadRb1l61vZ5bn17z0x208';
@@ -43,10 +63,12 @@ function track(eventName, params) {
     tips.forEach(a => a.style.display = 'none');
     return;
   }
+  const sep = STRIPE_LINK.includes('?') ? '&' : '?';
+  const stripeUrl = STRIPE_LINK + sep + 'client_reference_id=' + encodeURIComponent(CLIENT_ID);
   tips.forEach(a => {
-    a.href = STRIPE_LINK;
+    a.href = stripeUrl;
     a.target = '_blank'; a.rel = 'noopener';
-    a.addEventListener('click', () => track('support_click', { label: a.dataset.tip }));
+    a.addEventListener('click', () => track('support_click', { label: a.dataset.tip, client_id: CLIENT_ID }));
   });
 })();
 
@@ -68,6 +90,7 @@ document.getElementById('surveyForm').addEventListener('submit', e => {
     if (ENTRY.nickname) data[ENTRY.nickname] = document.getElementById('nickname').value;
     if (ENTRY.consent) data[ENTRY.consent] = document.getElementById('consent').value;
     if (ENTRY.age) data[ENTRY.age] = document.getElementById('age').value;
+    if (ENTRY.clientId) data[ENTRY.clientId] = CLIENT_ID;
     postForm(SURVEY_FORM, data);
   }
   track('survey_submit');
