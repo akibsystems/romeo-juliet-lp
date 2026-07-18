@@ -46,7 +46,7 @@
   main { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; padding: 0 20px 80px; }
 
   /* HERO: バルコニーの夜 */
-  .hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; }
+  .hero { padding: 52px 0 6px; display: flex; flex-direction: column; }
   .moon {
     width: 74px; height: 74px; border-radius: 50%; margin-bottom: 24px;
     background: radial-gradient(circle at 35% 35%, #fff7d6, var(--gold));
@@ -66,13 +66,6 @@
   .latin-sub { font-size: 15px; color: var(--violet); letter-spacing: .12em; margin-bottom: 18px; text-shadow: 0 0 12px rgba(155,92,255,.6); }
   .hero .sub { font-size: 14.5px; color: var(--dim); margin-bottom: 22px; }
   .stage-info { font-size: 13px; color: var(--dim); border-left: 3px solid var(--pink); padding-left: 14px; line-height: 1.8; }
-  .scroll-hint {
-    margin-top: 44px; font-size: 12px; font-weight: 700; color: var(--dim); letter-spacing: .3em;
-    display: flex; flex-direction: column; gap: 4px; cursor: pointer; -webkit-tap-highlight-color: transparent;
-  }
-  .scroll-hint .auto-arrow { animation: cascade 2.2s ease-in-out infinite; }
-  @keyframes cascade { 0%, 55%, 100% { opacity: .16; } 25% { opacity: 1; color: var(--pink); } }
-
   .panel {
     border: 1px solid var(--line); border-radius: 14px; background: var(--panel);
     padding: 28px 22px; margin: 26px 0; position: relative;
@@ -121,7 +114,6 @@
   }
   .support-btn:hover { background: rgba(255,209,102,.16); }
   .support-btn small { display: block; font-size: 11.5px; font-weight: 500; margin-top: 2px; }
-  .hero-cta { margin-top: 26px; align-self: flex-start; }
   .tipping h2 { font-size: 17px; font-weight: 900; margin-bottom: 4px; }
   .tipping .sub { font-size: 12.5px; color: var(--dim); margin-bottom: 18px; }
   .tip-menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 18px; }
@@ -181,10 +173,6 @@
       2026.7.19(日) 12:00<br>
       アスティとくしま テレコメディア ホール
     </p>
-    <a class="support-btn hero-cta" data-tip="hero" href="#">拍手のかわりに、投げ銭を!<small>入場無料・100円から</small></a>
-    <div class="scroll-hint" id="scrollHint" onclick="document.querySelector('.speech').scrollIntoView({behavior:'smooth'})">
-      <span>&#9660; SCROLL</span>
-    </div>
   </section>
 
   <section>

@@ -141,26 +141,3 @@ document.getElementById('surveyForm').addEventListener('submit', e => {
   }
 })();
 
-// ===== ▼をヒーロー下端まで敷き詰める =====
-(function arrows() {
-  const hint = document.getElementById('scrollHint');
-  const hero = document.querySelector('.hero');
-  if (!hint || !hero) return;
-  const fill = () => {
-    hint.querySelectorAll('.auto-arrow').forEach(el => el.remove());
-    const label = hint.firstElementChild;
-    const heroBottom = hero.getBoundingClientRect().bottom + window.scrollY;
-    const start = label.getBoundingClientRect().bottom + window.scrollY;
-    const step = 26;
-    const count = Math.min(20, Math.max(4, Math.floor((heroBottom - start - 20) / step)));
-    for (let i = 0; i < count; i++) {
-      const s = document.createElement('span');
-      s.className = 'auto-arrow';
-      s.textContent = '▼';
-      s.style.animationDelay = ((i + 1) * 0.16) + 's';
-      hint.appendChild(s);
-    }
-  };
-  fill();
-  window.addEventListener('resize', fill);
-})();
