@@ -34,6 +34,15 @@ const CLIENT_ID = (() => {
 })();
 
 // ===== Stripe Payment Link(投げ銭) =====
+// 金額別リンク(事前設定金額入り・Stripe側で変更も可)
+const TIP_LINKS = {
+  clap:    'https://buy.stripe.com/14AbJ3e7S8Yr6frbMd0x209', // ¥100 拍手
+  bravo:   'https://buy.stripe.com/8x2bJ3bZK7Un47jcQh0x20a', // ¥500 ブラボー!
+  bouquet: 'https://buy.stripe.com/dRm8wR4xib6z5bn6rT0x20b', // ¥1,000 花束
+  ovation: 'https://buy.stripe.com/aFacN7aVGgqT33f2bD0x20c', // ¥3,000 スタンディングオベーション
+  patron:  'https://buy.stripe.com/5kQ4gB7Ju2A347j8A10x20d'  // ¥10,000 パトロン
+};
+// 金額自由リンク(mainボタン・フォールバック)
 const STRIPE_LINK = 'https://donate.stripe.com/aFadRb1l61vZ5bn17z0x208';
 
 // ===== 計測(あとから設定: IDを入れると有効化) =====
@@ -63,10 +72,9 @@ function track(eventName, params) {
     tips.forEach(a => a.style.display = 'none');
     return;
   }
-  const sep = STRIPE_LINK.includes('?') ? '&' : '?';
-  const stripeUrl = STRIPE_LINK + sep + 'client_reference_id=' + encodeURIComponent(CLIENT_ID);
+  const withId = (url) => url + (url.includes('?') ? '&' : '?') + 'client_reference_id=' + encodeURIComponent(CLIENT_ID);
   tips.forEach(a => {
-    a.href = stripeUrl;
+    a.href = withId(TIP_LINKS[a.dataset.tip] || STRIPE_LINK);
     a.target = '_blank'; a.rel = 'noopener';
     a.addEventListener('click', () => track('support_click', { label: a.dataset.tip, client_id: CLIENT_ID }));
   });
