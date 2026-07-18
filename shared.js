@@ -17,7 +17,7 @@ const ENTRY = {
 const STRIPE_LINK = 'https://donate.stripe.com/aFadRb1l61vZ5bn17z0x208';
 
 // ===== 計測(あとから設定: IDを入れると有効化) =====
-const GA_ID = ''; // 例: 'G-XXXXXXXXXX'
+const GA_ID = 'G-L3DXLYGGKW';
 
 // --- GA4 ---
 if (GA_ID) {
