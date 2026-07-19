@@ -145,9 +145,15 @@ document.getElementById('surveyForm').addEventListener('submit', e => {
       return;
     }
     if (isIOS) {
-      // iOS: twitter:// でXアプリの投稿画面のみを開く(X重視・共有シートなし)。
-      // 確認ダイアログ中にタイマーが発火して二重表示になるためフォールバックは置かない。
+      // iOS: twitter:// でXアプリの投稿画面を開く(X重視・共有シートは使わない)。
+      // アプリ未インストールの場合のみ、5秒後にブラウザ版Xの投稿画面へ。
+      // アプリが起動すれば(画面が隠れる/フォーカスが外れる)タイマーを即キャンセル。
       e.preventDefault();
+      const timer = setTimeout(() => { window.location.href = intentUrl; }, 5000);
+      const cancel = () => clearTimeout(timer);
+      window.addEventListener('pagehide', cancel, { once: true });
+      window.addEventListener('blur', cancel, { once: true });
+      document.addEventListener('visibilitychange', () => { if (document.hidden) cancel(); }, { once: true });
       window.location.href = 'twitter://post?message=' + encodeURIComponent(text);
     }
     // PC: x.comのintentをそのまま開く(リダイレクトなし)
