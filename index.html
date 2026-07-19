@@ -134,14 +134,17 @@
   .tip-menu a span { font-size: 12px; color: var(--dim); font-weight: 700; }
   .tip-menu a.big { grid-column: span 2; background: linear-gradient(90deg, rgba(58,166,255,.12), rgba(255,89,100,.12)); }
   .tip-note { font-size: 11.5px; color: var(--dim); margin-top: 10px; }
-  .sns { margin: 34px 0 8px; text-align: center; }
-  .sns p { font-size: 14px; color: var(--ink); font-weight: 500; margin-bottom: 10px; }
-  .sns a {
-    display: inline-block; text-decoration: none; font-size: 15px; font-weight: 800;
-    color: var(--montague); padding: 10px 22px; border: 2px dashed var(--montague);
-    border-radius: 999px; transition: all .2s;
+  .sns { text-align: center; }
+  .sns h2 { font-size: 16.5px; font-weight: 800; margin: 4px 0 14px; line-height: 1.7; }
+  .sns-btn {
+    display: block; text-decoration: none; text-align: center;
+    font-size: 16.5px; font-weight: 800; letter-spacing: .02em;
+    color: #fff; background: var(--ink); border: 2px solid var(--ink);
+    border-radius: 999px; padding: 16px 10px;
+    box-shadow: 4px 4px 0 rgba(51,39,42,.2); transition: transform .15s, box-shadow .15s;
   }
-  .sns a:hover { background: rgba(58,166,255,.08); }
+  .sns-btn:hover { transform: translate(-1px,-1px); box-shadow: 6px 6px 0 rgba(51,39,42,.25); }
+  .sns-btn small { display: block; font-size: 11.5px; font-weight: 500; opacity: .85; margin-top: 3px; }
 
   /* THANKS */
   .thanks { display: none; min-height: 86vh; flex-direction: column; justify-content: center; text-align: center; }
@@ -211,7 +214,7 @@
   <section class="support" id="support">
     <div class="panel tipping">
       <span class="tag">CURTAIN CALL</span>
-      <h2>拍手のかわりに、投げ銭を。</h2>
+      <h2>拍手と一緒に、投げ銭を。</h2>
       <p class="sub">今日の気分は、どの拍手でしたか?</p>
       <div class="tip-menu">
         <a data-tip="clap" href="#"><b>¥100</b><span>拍手</span></a>
@@ -225,9 +228,12 @@
   </section>
 
   <!-- SNS -->
-  <section class="sns">
-    <p>ハッシュタグをつけて感想の投稿をお待ちしております!</p>
-    <a href="https://x.com/intent/post?text=%23%E3%82%AB%E3%82%AF%E3%82%B7%E3%83%B3%E3%83%8F%E3%83%B3%20%23%E3%83%AD%E3%83%9F%E3%82%B8%E3%83%A5%E3%83%AA%E3%83%84%E3%82%A2%E3%83%BC2026" target="_blank" rel="noopener">#カクシンハン #ロミジュリツアー2026</a>
+  <section>
+    <div class="panel sns">
+      <span class="tag">SHARE</span>
+      <h2>ハッシュタグをつけて<br>感想の投稿をお待ちしております!</h2>
+      <a id="snsShareBtn" class="sns-btn" href="#" target="_blank" rel="noopener">#カクシンハン #ロミジュリツアー2026<small>タップして投稿画面へ</small></a>
+    </div>
   </section>
 
   <!-- SURVEY -->
@@ -281,7 +287,7 @@
     <p class="hearts"><span class="m">&#9829;</span><span class="c">&#9829;</span></p>
     <p class="big">感想、たしかに受け取りました!</p>
     <p class="note">『カジュアルなロミオとジュリエット』<br>HRWC 2026 — アスティとくしま</p>
-    <p class="follow-note" style="margin-top:18px">最後にもうひとつ。<br><strong>拍手のかわりの投げ銭を、忘れずに。</strong></p>
+    <p class="follow-note" style="margin-top:18px">最後にもうひとつ。<br><strong>拍手と一緒に、投げ銭も忘れずに。</strong></p>
     <div class="follow">
       <p class="follow-note">ツアーの続報・次の公演地は、<strong>カクシンハンのX</strong>で発表されます。<br>この物語の「続き」は、フォローして観測してください。</p>
       <a class="btn-x" href="https://x.com/KAKUSHINHAN" target="_blank" rel="noopener">カクシンハンをフォロー<small>@KAKUSHINHAN</small></a>
@@ -305,6 +311,6 @@
   HRWC 2026 | 2026.7.19 アスティとくしま | <a href="https://hrwc.jp/" target="_blank" rel="noopener">hrwc.jp</a> | <a href="https://peatix.com/event/5072716" target="_blank" rel="noopener">Peatix</a>
 </footer>
 
-<script src="shared.js?v=3"></script>
+<script src="shared.js?v=4"></script>
 </body>
 </html>

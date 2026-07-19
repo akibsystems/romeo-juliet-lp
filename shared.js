@@ -121,13 +121,21 @@ document.getElementById('surveyForm').addEventListener('submit', e => {
   window.scrollTo(0, 0);
 });
 
-// ===== X共有ボタン =====
-(function setupShare() {
-  const btn = document.getElementById('shareBtn');
+// ===== SNS共有ボタン(ハッシュタグ投稿) =====
+// モバイルでは navigator.share(OSの共有シート)を優先。
+// X公式アプリの投稿画面に直接渡るので、アプリ内Webのログイン要求を回避できる。
+(function setupSns() {
+  const btn = document.getElementById('snsShareBtn');
   if (!btn) return;
-  const text = encodeURIComponent('『カジュアルなロミオとジュリエット』観てきた! #カクシンハン #カジュアルロミジュリツアー');
-  btn.href = 'https://x.com/intent/post?text=' + text;
-  btn.addEventListener('click', () => track('share_click'));
+  const text = '#カクシンハン #ロミジュリツアー2026';
+  btn.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
+  btn.addEventListener('click', (e) => {
+    track('share_click');
+    if (navigator.share) {
+      e.preventDefault();
+      navigator.share({ text }).catch(() => {});
+    }
+  });
 })();
 
 // ===== 紙吹雪(ページ側が data-confetti を持つ場合のみ) =====
