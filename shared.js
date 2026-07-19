@@ -128,13 +128,22 @@ document.getElementById('surveyForm').addEventListener('submit', e => {
   const btn = document.getElementById('snsShareBtn');
   if (!btn) return;
   const text = '#カクシンハン #ロミジュリツアー2026';
-  btn.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
+  const intentUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
+  btn.href = intentUrl;
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   btn.addEventListener('click', (e) => {
     track('share_click');
-    if (navigator.share) {
-      e.preventDefault();
-      navigator.share({ text }).catch(() => {});
-    }
+    if (!isMobile) return; // PCは通常のintentリンク
+    e.preventDefault();
+    // Xアプリの投稿画面を直接開く。失敗時(未インストール)は共有シート→intentの順でフォールバック
+    const timer = setTimeout(() => {
+      if (navigator.share) navigator.share({ text }).catch(() => {});
+      else window.location.href = intentUrl;
+    }, 1400);
+    const cancel = () => clearTimeout(timer);
+    window.addEventListener('pagehide', cancel, { once: true });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) cancel(); }, { once: true });
+    window.location.href = 'twitter://post?message=' + encodeURIComponent(text);
   });
 })();
 
