@@ -128,7 +128,7 @@ document.getElementById('surveyForm').addEventListener('submit', e => {
   const btn = document.getElementById('snsShareBtn');
   if (!btn) return;
   const text = '#カクシンハン #ロミジュリツアー2026';
-  const intentUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
+  const intentUrl = 'https://x.com/intent/post?text=' + encodeURIComponent(text);
   btn.href = intentUrl;
   const ua = navigator.userAgent;
   const isIOS = /iPhone|iPad|iPod/i.test(ua);
@@ -145,19 +145,12 @@ document.getElementById('surveyForm').addEventListener('submit', e => {
       return;
     }
     if (isIOS) {
-      // iOS: twitter:// でアプリの投稿画面を直接開く。
-      // 未インストールなら共有シート→intentの順でフォールバック
+      // iOS: twitter:// でXアプリの投稿画面のみを開く(X重視・共有シートなし)。
+      // 確認ダイアログ中にタイマーが発火して二重表示になるためフォールバックは置かない。
       e.preventDefault();
-      const timer = setTimeout(() => {
-        if (navigator.share) navigator.share({ text }).catch(() => {});
-        else window.location.href = intentUrl;
-      }, 1400);
-      const cancel = () => clearTimeout(timer);
-      window.addEventListener('pagehide', cancel, { once: true });
-      document.addEventListener('visibilitychange', () => { if (document.hidden) cancel(); }, { once: true });
       window.location.href = 'twitter://post?message=' + encodeURIComponent(text);
     }
-    // PCは通常のintentリンクのまま
+    // PC: x.comのintentをそのまま開く(リダイレクトなし)
   });
 })();
 
