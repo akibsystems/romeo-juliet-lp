@@ -130,20 +130,34 @@ document.getElementById('surveyForm').addEventListener('submit', e => {
   const text = '#カクシンハン #ロミジュリツアー2026';
   const intentUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
   btn.href = intentUrl;
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const ua = navigator.userAgent;
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
   btn.addEventListener('click', (e) => {
     track('share_click');
-    if (!isMobile) return; // PCは通常のintentリンク
-    e.preventDefault();
-    // Xアプリの投稿画面を直接開く。失敗時(未インストール)は共有シート→intentの順でフォールバック
-    const timer = setTimeout(() => {
-      if (navigator.share) navigator.share({ text }).catch(() => {});
-      else window.location.href = intentUrl;
-    }, 1400);
-    const cancel = () => clearTimeout(timer);
-    window.addEventListener('pagehide', cancel, { once: true });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) cancel(); }, { once: true });
-    window.location.href = 'twitter://post?message=' + encodeURIComponent(text);
+    if (isAndroid) {
+      // Android: intent:// 構文。アプリがあれば直接起動、
+      // なければ browser_fallback_url へブラウザが自動で遷移
+      e.preventDefault();
+      window.location.href = 'intent://post?message=' + encodeURIComponent(text) +
+        '#Intent;scheme=twitter;package=com.twitter.android;S.browser_fallback_url=' +
+        encodeURIComponent(intentUrl) + ';end';
+      return;
+    }
+    if (isIOS) {
+      // iOS: twitter:// でアプリの投稿画面を直接開く。
+      // 未インストールなら共有シート→intentの順でフォールバック
+      e.preventDefault();
+      const timer = setTimeout(() => {
+        if (navigator.share) navigator.share({ text }).catch(() => {});
+        else window.location.href = intentUrl;
+      }, 1400);
+      const cancel = () => clearTimeout(timer);
+      window.addEventListener('pagehide', cancel, { once: true });
+      document.addEventListener('visibilitychange', () => { if (document.hidden) cancel(); }, { once: true });
+      window.location.href = 'twitter://post?message=' + encodeURIComponent(text);
+    }
+    // PCは通常のintentリンクのまま
   });
 })();
 
