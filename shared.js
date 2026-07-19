@@ -43,7 +43,7 @@ const TIP_LINKS = {
   patron:  'https://buy.stripe.com/5kQ4gB7Ju2A347j8A10x20d'  // ¥10,000 パトロン
 };
 // 金額自由リンク(mainボタン・フォールバック)
-const STRIPE_LINK = 'https://donate.stripe.com/aFadRb1l61vZ5bn17z0x208';
+const STRIPE_LINK = 'https://buy.stripe.com/3cIdRb0h22A36fr03v0x20e';
 
 // ===== 計測(あとから設定: IDを入れると有効化) =====
 const GA_ID = 'G-L3DXLYGGKW';
